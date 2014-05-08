@@ -8,6 +8,7 @@ module Backend.Recipe
 ---------------------------------------
 --Imports
 
+import Control.Applicative ((<$>), (<*>))
 import Data.List (isPrefixOf)
 import Data.Char (toLower)
 
@@ -36,7 +37,7 @@ type RecipeInfo = (RecipeName, ConversionFactor, [Ingredient])
 --Functions
 
 decomposeRecipe :: String -> [String]
-decomposeRecipe = filter (not . null) . filter (not . isPrefixOf "--") . lines
+decomposeRecipe = filter ((&&) <$> (not . null) <*> (not . isPrefixOf "--")) . lines
 
 handleLines :: [String] -> RecipeInfo
 handleLines (n:c:i) = (n, conversion c, ingredients i)
@@ -48,7 +49,7 @@ formatOutput (n,c,i) = "--Recipe\n" ++ n ++ "\n--Scaled by\n" ++ show c ++ "\n--
   where ingredients = unlines . map show $ i
 
 calcConversion :: String -> ConversionFactor
-calcConversion x = given x / wanted x
+calcConversion x = wanted x / given x
     where given  = read . head . words
           wanted = read . last . words
 
@@ -59,5 +60,5 @@ buildIngredient (v:u:i)
 
 buildIngredient' :: Float -> [String] -> Ingredient
 buildIngredient' c (v:u:i)  
-  | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v / c) u (unwords i)
-  | map toLower u `elem` ["l", "litre", "liter"]         = Liquid (read v / c) u (unwords i)
+  | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v * c) u (unwords i)
+  | map toLower u `elem` ["l", "litre", "liter"]         = Liquid (read v * c) u (unwords i)
