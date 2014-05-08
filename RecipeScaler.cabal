@@ -15,6 +15,6 @@ build-type:          Simple
 cabal-version:       >=1.8
 
 executable RecipeScaler
-  -- main-is:             
-  -- other-modules:       
+  main-is:          RecipeScaler.hs   
+  other-modules:    Backend.Recipe   
   build-depends:       base ==4.6.*
