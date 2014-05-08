@@ -9,7 +9,7 @@ Takes two arguments: the starting recipe, and a filename to save the scaled vers
 e.g. 
 
 ```Bash
-$> Main recipe_in.txt recipe_out.txt
+$> RecipeScaler recipe_in.txt recipe_out.txt
 ```
 
 Initial recipe example (example_recipe.txt):
