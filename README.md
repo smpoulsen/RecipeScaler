@@ -6,7 +6,11 @@ A program to scale the measurements for ingredients (specifically for baking).
 Measurements are expected to be precise weights in metric units.
 
 Takes two arguments: the starting recipe, and a filename to save the scaled version to.
-e.g. $> Main recipe_in.txt recipe_out.txt
+e.g. 
+
+```Bash
+$> Main recipe_in.txt recipe_out.txt
+```
 
 Initial recipe example (example_recipe.txt):
 
