@@ -12,7 +12,7 @@ e.g.
 $> RecipeScaler recipe_in.txt recipe_out.txt
 ```
 
-Initial recipe example (example_recipe.txt):
+Input example (example_recipe.txt):
 
 ```
 --Recipe
@@ -31,9 +31,9 @@ Lemon Poundcake
 ```
 
 Blank lines and lines starting with "--" are ignored.
-The program looks for the line "x -> y" and uses that to calculate the scaling factor.
+The program uses the line "x -> y" to calculate the scaling factor.
 
-Example recipe after conversion:
+Output example (recipe after scaling ingredients):
 
 ```
 --Recipe
