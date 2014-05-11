@@ -15,22 +15,14 @@ import Data.Char (toLower)
 ---------------------------------------
 --Data & Types
 
-data Ingredient = 
-    Solid { mass :: Float
-          , unit :: String
-          , item :: String
-          }
-  | Liquid { volume :: Float
-           , unit   :: String
-           , item   :: String
-           }
-  deriving (Eq)
+data Ingredient = Ingredient { amount :: Float
+                             , unit :: String
+                             , item :: String
+                             } deriving (Eq)
 instance Show Ingredient where
-  show x = case x of
-    Solid m u i  -> show m ++ " " ++ u ++ " " ++ i
-    Liquid m u i -> show m ++ " " ++ u ++ " " ++ i
+  show (Ingredient a u i) = show a ++ " " ++ u ++ " " ++ i
 
-type ConversionFactor = Float
+type ConversionFactor = (Float, Float)
 type RecipeName = String
 type RecipeInfo = (RecipeName, ConversionFactor, [Ingredient])
 ---------------------------------------
@@ -41,24 +33,31 @@ decomposeRecipe = filter ((&&) <$> (not . null) <*> (not . isPrefixOf "--")) . l
 
 handleLines :: [String] -> RecipeInfo
 handleLines (n:c:i) = (n, conversion c, ingredients i)
-  where ingredients = map (buildIngredient' (conversion c) . words) 
+  where ingredients = map (buildIngredient' (snd . conversion $ c) . words) 
         conversion  = calcConversion 
 
 formatOutput :: RecipeInfo -> String
-formatOutput (n,c,i) = "--Recipe\n" ++ n ++ "\n--Scaled by\n" ++ show c ++ "\n--Ingredients\n" ++ ingredients
+formatOutput (n,c,i) = "--Recipe\n" ++ n ++ "\n--Servings:\nScaled original by " ++ scaling ++ " to get " ++ servings ++" serving(s).\n--Ingredients\n" ++ ingredients
   where ingredients = unlines . map show $ i
-
+        scaling     = show . snd $ c
+        servings    = show . fst $ c
 calcConversion :: String -> ConversionFactor
-calcConversion x = wanted x / given x
+calcConversion x = (wanted x, wanted x / given x    )
     where given  = read . head . words
           wanted = read . last . words
 
 buildIngredient :: [String] -> Ingredient
-buildIngredient (v:u:i)  
-  | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v) u (unwords i)
-  | map toLower u `elem` ["l", "litre", "liter", "ml"]   = Liquid (read v) u (unwords i)
+buildIngredient (a:u:i) = Ingredient (read a) u (unwords i)
 
 buildIngredient' :: Float -> [String] -> Ingredient
-buildIngredient' c (v:u:i)  
-  | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v * c) u (unwords i)
-  | map toLower u `elem` ["l", "litre", "liter", "ml"]   = Liquid (read v * c) u (unwords i)
+buildIngredient' c (v:u:i) = convertUnits $ Ingredient (read v * c) u (unwords i)
+
+convertUnits :: Ingredient -> Ingredient
+convertUnits (Ingredient a u i) 
+    | a < 1 = case map toLower u of
+                "kg" -> Ingredient (a * 1000) "g" i
+                "l"  -> Ingredient (a * 1000) "mL" i
+    | a > 1000 = case map toLower u of
+                  "g"  -> Ingredient (a / 1000) "kg" i
+                  "ml" -> Ingredient (a / 1000) "L" i
+    | otherwise = Ingredient a u i
