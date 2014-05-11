@@ -38,8 +38,8 @@ Output example (recipe after scaling ingredients):
 ```
 --Recipe
 Lemon Poundcake
---Scaled by
-0.5
+--Servings:
+Scaled original by 0.5 to get 2.0 serving(s).
 --Ingredients
 3.5 g salt
 340.0 g cake flour
