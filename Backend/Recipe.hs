@@ -11,6 +11,7 @@ module Backend.Recipe
 import Control.Applicative ((<$>), (<*>))
 import Data.List (isPrefixOf)
 import Data.Char (toLower)
+import Text.Printf (printf)
 
 ---------------------------------------
 --Data & Types
@@ -20,7 +21,7 @@ data Ingredient = Ingredient { amount :: Float
                              , item :: String
                              } deriving (Eq)
 instance Show Ingredient where
-  show (Ingredient a u i) = show a ++ " " ++ u ++ " " ++ i
+  show (Ingredient a u i) = printf "%.2f" a ++ " " ++ u ++ " " ++ i
 
 type ConversionFactor = (Float, Float)
 type RecipeName = String
