@@ -52,7 +52,9 @@ convertUnits ingredient@(Ingredient a u i)
     | a < 1     = case map toLower u of
                   "kg" -> Ingredient (a * 1000) "g" i
                   "l"  -> Ingredient (a * 1000) "mL" i
+                  otherwise -> ingredient
     | a > 1000  = case map toLower u of
                   "g"  -> Ingredient (a / 1000) "kg" i
                   "ml" -> Ingredient (a / 1000) "L" i
+                  otherwise -> ingredient 
     | otherwise = ingredient
