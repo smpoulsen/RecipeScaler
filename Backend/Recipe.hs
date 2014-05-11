@@ -56,9 +56,9 @@ calcConversion x = wanted x / given x
 buildIngredient :: [String] -> Ingredient
 buildIngredient (v:u:i)  
   | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v) u (unwords i)
-  | map toLower u `elem` ["l", "litre", "liter"]         = Liquid (read v) u (unwords i)
+  | map toLower u `elem` ["l", "litre", "liter", "ml"]   = Liquid (read v) u (unwords i)
 
 buildIngredient' :: Float -> [String] -> Ingredient
 buildIngredient' c (v:u:i)  
   | map toLower u `elem` ["g", "gram", "kg", "kilogram"] = Solid (read v * c) u (unwords i)
-  | map toLower u `elem` ["l", "litre", "liter"]         = Liquid (read v * c) u (unwords i)
+  | map toLower u `elem` ["l", "litre", "liter", "ml"]   = Liquid (read v * c) u (unwords i)
