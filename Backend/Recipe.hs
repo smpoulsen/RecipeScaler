@@ -32,9 +32,8 @@ decomposeRecipe :: String -> [String]
 decomposeRecipe = filter ((&&) <$> (not . null) <*> (not . isPrefixOf "--")) . lines
 
 handleLines :: [String] -> RecipeInfo
-handleLines (n:c:i) = (n, conversion c, ingredients i)
-  where ingredients = map (buildIngredient' (snd . conversion $ c) . words) 
-        conversion  = calcConversion 
+handleLines (n:c:i) = (n, calcConversion c, ingredients i)
+  where ingredients = map (buildIngredient' (snd . calcConversion $ c) . words) 
 
 calcConversion :: String -> ConversionFactor
 calcConversion x = (wanted x, wanted x / given x    )
