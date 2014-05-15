@@ -1,6 +1,12 @@
 #RecipeScaler
 
-A program to scale ingredient measurements for cooking.
+Scale cooking ingredient measurements.
+
+###Installation:
+Installable via 
+```Bash
+$ cabal install
+```
 
 ###Use:
 Measurements are expected to be either weights in metric units, or <a href=https://en.wikipedia.org/wiki/Cooking_weights_and_measures#United_States_measures>US cutomary units</a>.
