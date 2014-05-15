@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                RecipeScaler
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            Scales ingredient measurements for recipes.
 -- description:         
 license:             MIT
@@ -17,4 +17,4 @@ cabal-version:       >=1.8
 executable RecipeScaler
   main-is:          RecipeScaler.hs   
   other-modules:    Backend.Recipe   
-  build-depends:       base ==4.6.*
+  build-depends:       base >=4.6

@@ -1,16 +1,19 @@
-#Recipe Scaler
+#RecipeScaler
 
-###2014-05-08
-A program to scale the measurements for ingredients (specifically for baking).
+A program to scale ingredient measurements for cooking.
 
-Measurements are expected to be precise weights in metric units.
+###Use:
+Measurements are expected to be either weights in metric units, or <a href=https://en.wikipedia.org/wiki/Cooking_weights_and_measures#United_States_measures>US cutomary units</a>.
 
 Takes two arguments: the starting recipe, and a filename to save the scaled version to.
 e.g. 
 
 ```Bash
-$> RecipeScaler recipe_in.txt recipe_out.txt
+$ RecipeScaler recipe_in.txt recipe_out.txt
 ```
+
+In the input, blank lines and lines starting with "--" are ignored.
+The line "x -> y" is used to calculate the scaling factor.
 
 Input example (example_recipe.txt):
 
@@ -30,9 +33,6 @@ Lemon Poundcake
 907 g eggs, room temperature
 ```
 
-Blank lines and lines starting with "--" are ignored.
-The program uses the line "x -> y" to calculate the scaling factor.
-
 Output example (recipe after scaling ingredients):
 
 ```
@@ -50,3 +50,7 @@ Scaled original by 0.5 to get 2.0 serving(s).
 14.0 g lemon zest
 453.5 g eggs, room temperature
 ```
+
+####To-Do:
+- Graceful error handling.
+- Unit conversions for US measures.
