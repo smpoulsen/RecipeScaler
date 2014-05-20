@@ -49,12 +49,16 @@ buildIngredient' c (v:u:i) = convertUnits $ Ingredient (read v * c) u (unwords i
 
 convertUnits :: Ingredient -> Ingredient
 convertUnits ingredient@(Ingredient a u i) 
-    | a < 1     = case map toLower u of
-                  "kg" -> Ingredient (a * 1000) "g" i
-                  "l"  -> Ingredient (a * 1000) "mL" i
-                  otherwise -> ingredient
-    | a > 1000  = case map toLower u of
-                  "g"  -> Ingredient (a / 1000) "kg" i
-                  "ml" -> Ingredient (a / 1000) "L" i
-                  otherwise -> ingredient 
+    | a < 1          = case unit of
+                          "kg" -> Ingredient (a * 1000) "g" i
+                          "l"  -> Ingredient (a * 1000) "mL" i
+                          otherwise -> ingredient
+    | a > 1 && a < 8 = case unit of
+                          "tsp" -> Ingredient (a / 3) "Tbsp" i
+                          otherwise -> ingredient
+    | a > 1000       = case unit of
+                          "g"  -> Ingredient (a / 1000) "kg" i
+                          "ml" -> Ingredient (a / 1000) "L" i
+                          otherwise -> ingredient 
     | otherwise = ingredient
+    where unit = map toLower . filter (`notElem` ".,;:?!") $ u
