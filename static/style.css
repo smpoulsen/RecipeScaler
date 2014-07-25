@@ -1,7 +1,13 @@
+/* Complementary color scheme (via Kuler):
+        Main             : 00EDAB
+        Tone             : 76FFD9
+        Shade            : 01A074
+        Compliment Tone  : ED7958
+        Compliment Shade : A02400
+*/ 
 * {
     position: relative;
 }
-
 
 body  {
       font-family: "Century Gothic", Helvetica, sans-serif;
@@ -12,7 +18,6 @@ body  {
 a {
     text-decoration: none;
 }
-
 
 #header {
     background-color: #00EDAB;
@@ -28,7 +33,7 @@ a {
 
 .recipe {
     display: inline-block;
-    margin: 1% 5% 5% 1%;
+    margin: 1% 2% 2% 1%;
     vertical-align: top;
 }
 

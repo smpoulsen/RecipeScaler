@@ -39,7 +39,7 @@ instance FromJSON Ingredient where
   parseJSON _          = mzero 
 
 instance ToJSON Ingredient where
-  toJSON (Ingredient amount unit item) = object ["amount" .= (showGFloat (Just 2) amount ""), "unit" .= unit, "item" .= item] 
+  toJSON (Ingredient amount unit item) = object ["amount" .= showGFloat (Just 2) amount "", "unit" .= unit, "item" .= item] 
 
 data Recipe = Recipe { name        :: T.Text 
                      , current     :: Float
@@ -72,7 +72,7 @@ scaleRecipe r = Recipe n c d i'
         c     = current r
         d     = desired r
         scale = d / c
-        i' = map (\x -> (Ingredient (amount x * scale) (unit x) (item x))) $ ingredients r
+        i' = map (\x -> Ingredient (amount x * scale) (unit x) (item x)) $ ingredients r
 
 decodeRecipe :: BS.ByteString -> Maybe Recipe
 decodeRecipe = decode
