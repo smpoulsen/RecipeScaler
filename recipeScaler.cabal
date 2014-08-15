@@ -1,0 +1,30 @@
+name:                RecipeScaler
+version:             0.0.1
+synopsis:            Scale recipes to different serving sizes.
+homepage:            https://github.com/tpoulsen/RecipeScaler
+license:             BSD2
+author:              Travis Poulsen
+maintainer:          travis.poulsen@gmail.com
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.8
+
+executable recipeScaler 
+  main-is:             Main.hs
+  -- other-modules:       
+  build-depends:       base ==4.6.*
+                     , wai
+                     , warp
+                     , http-types
+                     , resourcet
+                     , scotty
+                     , text
+                     , bytestring
+                     , blaze-html
+                     , monad-logger ==0.3.0
+                     , heroku
+                     , transformers
+                     , wai-middleware-static
+                     , wai-extra
+                     , time
+                     , aeson

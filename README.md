@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #RecipeScaler
 
 Scale cooking ingredient measurements.
@@ -60,3 +61,10 @@ Scaled original by 0.5 to get 2.0 serving(s).
 ####To-Do:
 - Graceful error handling.
 - Unit conversions for US measures.
+=======
+Recipe scaler
+====
+
+Recipe Scaler exists to provide a quick, easy way to scale recipes by their serving size.
+It can currently scale using any type of measurement; in the future it will additionally be able to convert units.
+>>>>>>> 6203bcca1f4e0b1c6ee8e542a85041a49c9d0060

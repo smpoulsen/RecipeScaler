@@ -1,3 +1,5 @@
 dist/
 zucchini_quick_bread.txt
 test_cups.txt
+static/jquery-2.0.3.min.js
+.cabal-sandbox/
